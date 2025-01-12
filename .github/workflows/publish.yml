@@ -1,0 +1,48 @@
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: CI
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Python and then Jupyter
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - run: pip install jupyter
+
+      - name: Setup Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.11'
+
+      # this doesn't work together with Jupyter.
+      #- name: Cache Julia Packages
+      #  uses: julia-actions/cache@v2
+
+      - name: Install important Julia packages
+        shell: bash
+        run: |
+          julia -e 'using Pkg; Pkg.add("Example");'
+          julia -e 'using Pkg; Pkg.add("IJulia");'
+
+      - name: Execute main.jl with Julia
+        shell: bash
+        run: julia main.jl
+
+      - name: Execute main.ipynb with Jupyter
+        shell: bash
+        run: jupyter-execute main.ipynb
+
