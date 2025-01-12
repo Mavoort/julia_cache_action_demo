@@ -45,7 +45,8 @@ successfully, indicated by a green check mark. However, if you are using
 the Julia cache action, the workflow will fail with the following error:
 
 ``` bash
-ERROR: Jupyter kernel 'julia-1.11' not found. Known kernels: python3
+ERROR | No such kernel named julia-1.11
+Error: Process completed with exit code 1.
 ```
 
 **Since the Github action works correctly without the Julia cache, the
