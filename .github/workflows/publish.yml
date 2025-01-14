@@ -29,8 +29,8 @@ jobs:
           version: '1.11'
 
       # this doesn't work together with Jupyter.
-      - name: Cache Julia Packages
-        uses: julia-actions/cache@v2
+      #- name: Cache Julia Packages
+      #  uses: julia-actions/cache@v2
 
       - name: Print Julia Info I
         shell: bash
