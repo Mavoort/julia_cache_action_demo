@@ -32,10 +32,6 @@ jobs:
       #- name: Cache Julia Packages
       #  uses: julia-actions/cache@v2
 
-      - name: Print Julia Info I
-        shell: bash
-        run: julia -e 'println(readdir(Base.DEPOT_PATH[1]))'
-
       - name: Install important Julia packages
         shell: bash
         run: |
