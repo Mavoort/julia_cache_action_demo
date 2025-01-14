@@ -28,6 +28,10 @@ jobs:
         with:
           version: '1.11'
 
+      - name: Print Julia Info
+        shell: bash
+        run: julia -e 'println(readdir(Base.DEPOT_PATH[1]))'
+
       # this doesn't work together with Jupyter.
       - name: Cache Julia Packages
         uses: julia-actions/cache@v2
@@ -41,6 +45,10 @@ jobs:
       - name: Execute main.jl with Julia
         shell: bash
         run: julia main.jl
+
+      - name: Print Julia Info II
+        shell: bash
+        run: julia -e 'println(readdir(Base.DEPOT_PATH[1]))'
 
       - name: Execute main.ipynb with Jupyter
         shell: bash
